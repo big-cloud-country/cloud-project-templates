@@ -1,0 +1,74 @@
+    <html>
+    <head>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="input.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['gantt']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function toMilliseconds(minutes) {
+                return minutes * 60 * 1000;
+            }
+            function daysToMilliseconds(days) {
+                return days * 24 * 60 * 60 * 1000;
+            }
+
+
+            console.log(data)
+
+            //modify the array
+            data.forEach((item, index) => {
+                //get the start date if there is one
+                //modify the start_date element
+                if(item[9] != null) {
+                    item[3] = new Date(item[9].year, item[9].month-1, item[9].day);
+                } else {
+                    item[3] = null;
+                }
+                item.pop();
+            })
+            console.log(data)
+
+            function chartReadyHandler() {
+                //var a = document.getElementsByTagName('g')
+                //a[7].childNodes[2].textContent = 'hello'
+            }
+
+            function drawChart() {
+
+                var otherData = new google.visualization.DataTable();
+                otherData.addColumn('string', 'Task ID');
+                otherData.addColumn('string', 'Task Name');
+                otherData.addColumn('string', 'Resource');
+                otherData.addColumn('date', 'Start');
+                otherData.addColumn('date', 'End');
+                otherData.addColumn('number', 'Duration');
+                otherData.addColumn('number', 'Percent Complete');
+                otherData.addColumn('string', 'Dependencies');
+                otherData.addColumn({type: 'string', role: 'tooltip'})
+
+                otherData.addRows(data);
+
+                var options = {
+                    height: 275,
+                    width: 1000,
+                    tooltip: {isHtml: true},
+                    legend: 'none',
+                    gantt: {
+                        //defaultStartDate: new Date(startYear, startMonth, startDay)
+                        defaultStartDate: new Date(2021, 2, 15),
+                        criticalPathEnabled: true,
+                    }
+                };
+
+                var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+                google.visualization.events.addListener(chart, 'ready', chartReadyHandler);
+
+                chart.draw(otherData, options);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="chart_div"></div>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+id,phase,focus_area,task,description,duration,resource,dependencies,units,start_date,project_name,project_manager,project_owner
+1.1,Communications Overhaul,Planning,Map existing communication flows by priority,,1,,,weeks,6/1/2021,Austin Foot Clinic Twilio and Data Platform,,
+1.2,Communications Overhaul,Planning,Add new workflows & modify existing workflows,,1,,,,,,,
+1.3,Communications Overhaul,Planning,Design Twilio communications system,,1,,,,,,,
+1.4,Communications Overhaul,Planning,Design staff roll-out and patient roll-out,,1,,,,,,,
+2.1,Communications Overhaul,Migration,Build and test first workflow,,1,,1.1,,,,,
+2.2,Communications Overhaul,Migration,Train staff,,1,,2.1%50,,,,,
+2.3,Communications Overhaul,Migration,Migrate all other workflows sequentially,,3,,2.2%75,,,,,
+2.4,Communications Overhaul,Migration,Send data to analytics platform,,1,,2.3%50,,,,,
+3.1,Communications Overhaul,Test & Close,Troubleshoot and smooth rough edges,,3,,2.3%75,,,,,
+3.2,Communications Overhaul,Test & Close,Confirm proper flow,,2,,2.3%75,,,,,
+3.3,Communications Overhaul,Migration,Retire old phone system,,1,,3.2,,,,,
+3.4,Communications Overhaul,Test & Close,Turnover and close,,1,,3.1,,,,,
