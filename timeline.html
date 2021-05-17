@@ -3,21 +3,24 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="input.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', {'packages':['timeline']});
-        google.charts.setOnLoadCallback(drawChart);
+        google.charts.load('current', {'packages':['timeline', 'table']});
+        google.charts.setOnLoadCallback(drawVisuals);
 
+        function drawVisuals() {
+            drawChart();
+            drawTable();
+        }
         function toMilliseconds(minutes) {
             return minutes * 60 * 1000;
         }
         function daysToMilliseconds(days) {
             return days * 24 * 60 * 60 * 1000;
         }
-
+        console.log(metadata)
         //console.log(data)
         var chartData = []
         //modify the incoming data to shape to the chart
         data.forEach((item, index) => {
-            console.log(item)
             chartData.push([
                 item.focus_area,
                 item.task,
@@ -26,7 +29,6 @@
                 new Date(item.end_date.year, item.end_date.month - 1, item.end_date.day)
             ])
         })
-        console.log(chartData)
 
         //modify the array
         // data.forEach((item, index) => {
@@ -60,7 +62,7 @@
             otherData.addRows(chartData);
 
             var options = {
-                height: 1000,
+                height: 500,
                 width: 1000,
                 avoidOverlappingGridLines: true,
                 timeline: {
@@ -79,9 +81,42 @@
 
             chart.draw(otherData, options);
         }
+
+        function drawTable() {
+            var tableData = new google.visualization.DataTable();
+            tableData.addColumn('string', '');
+            tableData.addColumn('number', 'Option A');
+            tableData.addRows([
+                ['Price',  {v: metadata.project_cost} ],
+                ['Discount', 0],
+                ['Duration (weeks)', metadata.project_weeks],
+                ['Extras', 0],
+                ['Monthly Fee', metadata.monthly_cost]
+            ]);
+
+            var formatter = new google.visualization.NumberFormat({
+                prefix: '$',
+                negativeColor: 'red',
+                negativeParens: true,
+                fractionDigits: 0,
+            });
+            //formatter.format(tableData, 1); // Apply formatter to second column
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            var tableOptions = {
+                showRowNumber: false,
+                width: '25%',
+                height: '100%',
+                allowHtml: true,
+            }
+            table.draw(tableData, tableOptions);
+        }
+
     </script>
 </head>
 <body>
 <div id="chart_div"></div>
+<div id="table_div"></div>
+
 </body>
 </html>

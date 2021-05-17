@@ -6,10 +6,11 @@ import webbrowser
 import os
 from dateutil.parser import parse
 
+DAY_RATE = 1500
+
 #consume the csv
 filename = sys.argv[1]
 chart_html_page = 'timeline.html'
-print('filename:', filename)
 df = pd.read_csv(filename)
 
 units = df['units'][0]
@@ -45,9 +46,29 @@ def calculate_relative_start_date(dt, duration, partial_start_percentage):
     if units == 'weeks':
         return dt + datetime.timedelta(weeks=offset)
 
+def calculate_person_days(df):
+    #for each task
+    person_days = 0
+    for index, row in df.iterrows():
+        persons = 1 if pd.isna(row['resource']) else len(row['resource'].split(','))
+        days = int(row['duration']) if units == 'days' else 5 * int(row['duration'])
+        person_days += persons * days
 
-start_date = parse(df['start_date'][0])
-df['start_date'] = start_date
+    return person_days
+
+def calculate_durations(data, start_date):
+    end_dates = [d['end_date_dt'] for d in data]
+    project_close_date = max(end_dates)
+    project_days = (project_close_date - start_date).days
+    project_weeks = round((project_days/5),1)
+    return {
+        'project_days': project_days,
+        'project_weeks': project_weeks
+    }
+
+
+project_start_date = parse(df['start_date'][0])
+df['start_date'] = project_start_date
 #
 # start_date_js = 'var startMonth = ' + str(start_date.month - 1) + ';\n'
 # start_date_js += 'var startDay = ' + str(start_date.day) + ';\n'
@@ -148,26 +169,45 @@ for index, row in df.iterrows():
         'resource': item_resource,
         'dependencies': item_dependencies,
         'start_date': item_start_date,
-        'end_date': item_end_date
+        'end_date': item_end_date,
+        'end_date_dt': end_date,
     })
 
 #also add in units, start_date, and project name, project manager, project owner
+
+person_days = calculate_person_days(df)
+project_cost = person_days * DAY_RATE
+
+durations = calculate_durations(data, project_start_date)
+monthly_cost = round(project_cost / (durations['project_weeks'] / 4))
+
+#get rid of the end date
+cleaned_data = []
+for d in data:
+    del d['end_date_dt']
+    cleaned_data.append(d)
+
 metadata = {
     'project_name': df['project_name'][0] if not pd.isna(df['project_name'][0]) else '',
     'project_owner': df['project_owner'][0] if not pd.isna(df['project_owner'][0]) else '',
     'project_manager': df['project_manager'][0] if not pd.isna(df['project_manager'][0]) else '',
     'units': df['units'][0],
     'start_date': {
-        'year': start_date.year,
-        'month': start_date.month,
-        'day': start_date.day,
-    }
+        'year': project_start_date.year,
+        'month': project_start_date.month,
+        'day': project_start_date.day,
+    },
+    'person_days': person_days,
+    'project_days': durations['project_days'],
+    'project_weeks': durations['project_weeks'],
+    'project_cost': project_cost,
+    'monthly_cost': monthly_cost
 }
 
 metadata_js = 'var metadata = ' + json.dumps(metadata)
 
 #paste it as a js file with variable var data=
-file_contents = 'var data = ' + json.dumps(data) + ';\n'
+file_contents = 'var data = ' + json.dumps(cleaned_data) + ';\n'
 file_contents = file_contents + metadata_js
 
 #write to file data.js

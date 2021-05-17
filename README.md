@@ -1,5 +1,5 @@
 # Cloud Project Templates
-Templates, tools, and visualizations to make cloud infrastructure projects go better.
+Dead-simple templates in csv, tools, and visualizations to make cloud infrastructure projects go better.
 * Project plan templates based on years of best practices from AWS cloud consultants
 * Data, security, analytics, and machine learning projects that can be scaled to whatever size you need
 * Project timelines in days or weeks
