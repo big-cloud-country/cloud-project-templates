@@ -1,14 +1,14 @@
 <html>
 <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="input.js"></script>
+    <script type="text/javascript" src="timeline_input.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['timeline', 'table']});
         google.charts.setOnLoadCallback(drawVisuals);
 
         function drawVisuals() {
             drawChart();
-            drawTable();
+            //drawTable();
         }
         function toMilliseconds(minutes) {
             return minutes * 60 * 1000;

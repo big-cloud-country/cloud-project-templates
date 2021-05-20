@@ -1,0 +1,109 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="cost_input.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawVisuals);
+
+        function drawVisuals() {
+            drawChart();
+            //drawTable();
+        }
+        function toMilliseconds(minutes) {
+            return minutes * 60 * 1000;
+        }
+        function daysToMilliseconds(days) {
+            return days * 24 * 60 * 60 * 1000;
+        }
+        //console.log(data)
+        var chartData = []
+        chartData.push([
+            'Service', 'Monthly Cost'
+        ])
+        //modify the incoming data to shape to the chart
+        //sort descending
+        var sortedCostData = costData.sort((firstItem, secondItem) => secondItem['Monthly'] - firstItem['Monthly'])
+        sortedCostData.forEach((item, index) => {
+            chartData.push([
+                item['Service'],
+                item["Monthly"],
+            ])
+        })
+
+        var totalMonthlyCost = 0;
+        sortedCostData.forEach((item) => {
+            totalMonthlyCost += item['Monthly']
+        })
+
+        function drawChart() {
+            var container = document.getElementById('chart_div');
+            var chart = new google.charts.Bar(container);
+            var data = google.visualization.arrayToDataTable(chartData);
+
+            var options = {
+                chart: {
+                    title: 'Total Monthly Estimate: $' + totalMonthlyCost,
+                    //subtitle: 'Broken Down by Service'
+                },
+                explorer: {},
+                legend: {
+                    position: 'none',
+                },
+                height: 500,
+                width: 800,
+                orientation: 'vertical',
+                avoidOverlappingGridLines: true,
+                timeline: {
+                    colorByRowLabel: true,
+                    groupByRowLabel: true,
+                },
+                hAxis: {
+                    //format: 'MMMM d, yyyy',
+
+                },
+                vAxis: {
+                    //format: '$#,###'
+                }
+            };
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+
+        function drawTable() {
+            var tableData = new google.visualization.DataTable();
+            tableData.addColumn('string', '');
+            tableData.addColumn('number', 'Option A');
+            tableData.addRows([
+                ['Price',  {v: metadata.project_cost} ],
+                ['Discount', 0],
+                ['Duration (weeks)', metadata.project_weeks],
+                ['Extras', 0],
+                ['Monthly Fee', metadata.monthly_cost]
+            ]);
+
+            var formatter = new google.visualization.NumberFormat({
+                prefix: '$',
+                negativeColor: 'red',
+                negativeParens: true,
+                fractionDigits: 0,
+            });
+            //formatter.format(tableData, 1); // Apply formatter to second column
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            var tableOptions = {
+                showRowNumber: false,
+                width: '25%',
+                height: '100%',
+                allowHtml: true,
+            }
+            table.draw(tableData, tableOptions);
+        }
+
+    </script>
+</head>
+<body>
+<div id="chart_div"></div>
+
+</body>
+</html>
