@@ -19,14 +19,14 @@
     </tr>
     </thead>
     <tbody >
+    <tr id="duration">
+        <th scope="row">Duration (Weeks)</th>
+    </tr>
+    <tr id="extras">
+        <th scope="row">Extras</th>
+    </tr>
     <tr id="cost">
         <th scope="row">Total Before Discount</th>
-    </tr>
-    <tr id="duration">
-        <th scope="row">Duration</th>
-    </tr>
-    <tr id="person-days">
-        <th scope="row">Person-Days</th>
     </tr>
     <tr id="discount">
         <th scope="row">Discount</th>
@@ -36,9 +36,6 @@
     </tr>
     <tr id="monthly-payment">
         <th scope="row">Monthly Payment</th>
-    </tr>
-    <tr id="extras">
-        <th scope="row">Extras</th>
     </tr>
     </tbody>
 </table>
@@ -62,13 +59,12 @@
         th.textContent = item['name'];
         thead.appendChild(th)
 
-        insertTd('cost', item['cost']);
-        insertTd('discount', item['discount']);
         insertTd('duration', item['duration']);
-        insertTd('person-days', item['person-days']);
-        insertTd('total-after-discount', item['total-after-discount']);
-        insertTd('monthly-payment', item['monthly-payment']);
         insertTd('extras', item['extras'])
+        insertTd('cost', item['project_cost']);
+        insertTd('discount', item['discount']);
+        insertTd('total-after-discount', item['total-after-discount']);
+        insertTd('monthly-payment', item['monthly_cost']);
 
     })
     //make table
