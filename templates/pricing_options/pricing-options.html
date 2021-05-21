@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+        <title>Hello, world!</title>
+    </head>
+        <body>
+
+            <table class="table" id="options">
+                <thead>
+                <tr id="name">
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody >
+                <tr id="cost">
+                    <th scope="row">Total Before Discount</th>
+                </tr>
+                <tr id="duration">
+                    <th scope="row">Duration</th>
+                </tr>
+                <tr id="person-days">
+                    <th scope="row">Person-Days</th>
+                </tr>
+                <tr id="discount">
+                    <th scope="row">Discount</th>
+                </tr>
+                <tr id="total-after-discount">
+                    <th scope="row">Total after Discount</th>
+                </tr>
+                <tr id="monthly-payment">
+                    <th scope="row">Monthly Payment</th>
+                </tr>
+                </tbody>
+            </table>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+            <script src="pricing-options-input.js"></script>
+            <script type="text/javascript">
+                function insertTd(parent, text) {
+                    var tr = document.querySelector('#' + parent);
+                    var td = document.createElement('td');
+                    td.textContent = text;
+                    tr.appendChild(td);
+                }
+                //get data
+                //for each option in the array
+                var table = document.querySelector('#options')
+                pricingOptionsInput.forEach((item) => {
+                    var thead = document.querySelector('#name')
+                    var th = document.createElement('th')
+                    th.textContent = item['name'];
+                    thead.appendChild(th)
+
+                    insertTd('cost', item['cost']);
+                    insertTd('discount', item['discount']);
+                    insertTd('duration', item['duration']);
+                    insertTd('person-days', item['person-days']);
+                    insertTd('total-after-discount', item['total-after-discount']);
+                    insertTd('monthly-payment', item['monthly-payment']);
+
+                })
+                //make table
+            </script>
+        </body>
+</html>
