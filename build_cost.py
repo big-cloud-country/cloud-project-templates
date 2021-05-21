@@ -13,9 +13,12 @@ def build_cost(cost_filename):
 
     #clean it, do some interesting transformations
     #remove acknowledgements and stuff
+    for row in df.iterrows(item, index):
+
     length = len(df)
-    df.drop(inplace=True, index = length-1)
-    df.drop(inplace=True, index = length-2)
+    for idx in [length-1, length-2]:
+        if pd.isna(df.iloc[idx]['Monthly']):
+            df.drop(inplace=True, index=idx)
 
     #write to js -- cost_input.js
     json_data = df.to_json(orient='records')

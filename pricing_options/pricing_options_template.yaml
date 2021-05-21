@@ -1,0 +1,31 @@
+Pricing Options:
+  - Name: Option A
+    Duration:
+    Person-days:
+    Cost:
+    Discount: 0%
+    Total After Discount:
+    Extras:
+    Monthly Payment Raw:
+    Monthly Payment Rounded:
+    Project Plan Name:
+  - Name: Option B
+    Duration:
+    Person-days:
+    Cost:
+    Discount: 10%
+    Total After Discount:
+    Extras:
+    Monthly Payment Raw:
+    Monthly Payment Rounded:
+    Project Plan Name:
+  - Name: Option C
+    Duration:
+    Person-days:
+    Cost:
+    Discount: 25%
+    Total After Discount:
+    Extras:
+    Monthly Payment Raw:
+    Monthly Payment Rounded:
+    Project Plan Name:
