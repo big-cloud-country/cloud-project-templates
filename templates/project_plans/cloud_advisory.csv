@@ -1,8 +1,8 @@
 id,phase,focus_area,task,description,duration,resource,dependencies,units,start_date,project_name,project_manager,project_owner
-1.1,Cloud Advisory,Review,Review existing cloud practice areas,,1,,,weeks,6/14/2021,Wissen Cloud Advisory,Rob Whelan,Rob Whelan
-1.2,Cloud Advisory,Review,Review AWS Capabilities and Strategy,,1,,,,,,,
-1.3,Cloud Advisory,Review,Review Azure Capabilities and Strategy,,1,,,,,,,
-1.4,Cloud Advisory,Review,Personnel skillset,,1,,1.1,,,,,
-1.5,Cloud Advisory,Review,Customer analysis,"Examine customer industry, needs, and cloud maturity",1,,1.1,,,,,
-1.6,Cloud Advisory,Review,"Review presentation materials - first call, deep dive, technology-specific, proposals",,1,,1.1,,,,,
-2.1,Cloud Advisory,Planning,"Recommend changes and development to team, materials, approach, and skills",,12,,,,,,,
+1.1,Cloud Advisory,Review,Review existing cloud practice areas,,2,,,weeks,6/14/2021,Wissen Cloud Advisory,Rob Whelan,Rob Whelan
+1.2,Cloud Advisory,Review,Review AWS Capabilities and Strategy,,2,,,,,,,
+1.3,Cloud Advisory,Review,Review Azure Capabilities and Strategy,,2,,,,,,,
+1.4,Cloud Advisory,Review,Personnel skillset,,2,,,,,,,
+1.5,Cloud Advisory,Review,Customer analysis,"Examine customer industry, needs, and cloud maturity",2,,,,,,,
+1.6,Cloud Advisory,Review,"Review presentation materials - first call, deep dive, technology-specific, proposals",,2,,,,,,,
+2.1,Cloud Advisory,Advisory,"Recommend changes and development to team, materials, approach, and skills",,12,,"1.1,1.2,1.3,1.4,1.5,1.6",,,,,
