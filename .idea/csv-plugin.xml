@@ -3,21 +3,7 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="/project_plans/data_pipeline_one_source.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/project_plans/data_platform_setup.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/project_plans/twilio_migration.csv">
+        <entry key="/templates/project_plans/cloud_advisory.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
