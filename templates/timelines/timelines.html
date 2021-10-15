@@ -22,8 +22,9 @@
         //modify the incoming data to shape to the chart
         data.forEach((item, index) => {
             chartData.push([
-                item.focus_area,
+                //item.focus_area,
                 item.task,
+                item.description,
                 item.id,
                 new Date(item.start_date.year, item.start_date.month - 1, item.start_date.day),
                 new Date(item.end_date.year, item.end_date.month - 1, item.end_date.day)

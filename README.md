@@ -64,4 +64,4 @@ The following fields have only one value. They are metadata for your project.
 Create a new CSV file using the exact same headers as the examples in this repo. Put the file in `./project_plans` and name it something obvious.
 
 ## To update the source files in S3, to be used by `bigcloud` cli:
-`bash upload-to-s3.sh`
+`bash deploy-to-s3.sh`
